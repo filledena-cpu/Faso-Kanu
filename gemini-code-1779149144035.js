@@ -1,6 +1,51 @@
 // --- 1. COMPTEUR D'ENGAGEMENT ---
 const boutonEngager = document.getElementById('btn-engager');
-const affichageCompteur = document.getElementById('compteur');
+// --- 3. GESTION DU FORMULAIRE ET STOCKAGE LOCAL ---
+const formulaire = document.getElementById('form-projet');
+const messageFormulaire = document.getElementById('message-formulaire');
+const listeProjetsAffichage = document.getElementById('liste-projets');
+
+// Étape A : Fonction pour afficher les projets à l'écran
+function afficherLesProjets() {
+    // Vider la liste actuelle pour éviter les doublons d'affichage
+    listeProjetsAffichage.innerHTML = "";
+    
+    // Récupérer les projets dans le localStorage (ou créer un tableau vide si rien n'existe)
+    let projetsEnregistres = JSON.parse(localStorage.getItem('listeProjets')) || [];
+    
+    // Parcourir le tableau et créer un élément de liste HTML pour chaque projet
+    projetsEnregistres.forEach(function(item) {
+        const li = document.createElement('li');
+        li.style.marginBottom = "10px";
+        li.innerHTML = `<strong>${item.auteur}</strong> : ${item.texte}`;
+        listeProjetsAffichage.appendChild(li);
+    });
+}
+
+// Étape B : Écouter la soumission du formulaire
+formulaire.addEventListener('submit', function(evenement) {
+    evenement.preventDefault();
+
+    const nom = document.getElementById('nom-citoyen').value;
+    const projet = document.getElementById('texte-projet').value;
+
+    // 1. Récupérer le tableau existant depuis le localStorage
+    let projetsEnregistres = JSON.parse(localStorage.getItem('listeProjets')) || [];
+    
+    // 2. Ajouter le nouveau projet sous forme d'objet au tableau
+    projetsEnregistres.push({ auteur: nom, texte: projet });
+    
+    // 3. Sauvegarder le tableau mis à jour dans le localStorage (conversion en texte JSON obligatoire)
+    localStorage.setItem('listeProjets', JSON.stringify(projetsEnregistres));
+
+    // 4. Mettre à jour l'affichage et réinitialiser le formulaire
+    messageFormulaire.innerHTML = "Votre idée a été enregistrée avec succès !";
+    formulaire.reset();
+    afficherLesProjets(); 
+});
+
+// Étape C : Charger et afficher automatiquement les projets dès l'ouverture de la page
+afficherLesProjets();
 let nombreEngagements = 0;
 
 boutonEngager.addEventListener('click', function() {
