@@ -1,78 +1,26 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faso Kanu - Le Mali de Demain</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-    <header>
-        <h1>Faso Kanu</h1>
-        <p>Bâtir le Mali de demain par nos actions d'aujourd'hui</p>
-    </header>
-
-    <main class="container">
+<!-- Section 3 : Formulaire de projets avec Historique -->
+<section class="card">
+    <h2>Projet pour le Mali de demain</h2>
+    <p>Partage ton idée ou ton projet pour le développement ou l'amélioration de ta communauté.</p>
+    
+    <form id="form-projet">
+        <div class="form-group">
+            <label for="nom-citoyen">Ton Nom / Prénom :</label>
+            <input type="text" id="nom-citoyen" required placeholder="Ex: Amadou Diarra">
+        </div>
         
-        <section class="card">
-            <h2>Mon Engagement Citoyen</h2>
-            <p>Le Mali de demain dépend de nos actions quotidiennes. Fais le premier pas aujourd'hui !</p>
-            <div class="action-box">
-                <button id="btn-engager">Je m'engage pour mon pays !</button>
-                <p class="compteur-texte">Total des citoyens engagés : <span id="compteur">0</span></p>
-            </div>
-        </section>
+        <div class="form-group">
+            <label for="texte-projet">Description de ton projet ou idée :</label>
+            <textarea id="texte-projet" rows="4" required placeholder="Ex: Créer un club de nettoyage dans mon quartier..."></textarea>
+        </div>
+        
+        <button type="submit" id="btn-envoyer">Soumettre mon idée</button>
+    </form>
+    <div id="message-formulaire"></div>
 
-        <section class="card">
-            <h2>Quiz du Citoyen</h2>
-            <div class="score-container">
-                Mon Score : <span id="valeur-score">0</span> / 2
-            </div>
-            
-            <div class="quiz-group">
-                <p class="question">1. Quelle est la première couleur du drapeau du Mali ?</p>
-                <button class="btn-reponse q1" onclick="verifierQ1(this, true)">Vert</button>
-                <button class="btn-reponse q1" onclick="verifierQ1(this, false)">Jaune</button>
-                <button class="btn-reponse q1" onclick="verifierQ1(this, false)">Rouge</button>
-            </div>
-
-            <div class="quiz-group">
-                <p class="question">2. Quelle est la devise du Mali ?</p>
-                <button class="btn-reponse q2" onclick="verifierQ2(this, false)">Un Peuple, Une Foi, Une Patrie</button>
-                <button class="btn-reponse q2" onclick="verifierQ2(this, true)">Un Peuple, Un But, Une Foi</button>
-                <button class="btn-reponse q2" onclick="verifierQ2(this, false)">Justice, Piété, Travail</button>
-            </div>
-
-            <p id="feedback-quiz"></p>
-        </section>
-
-        <section class="card">
-            <h2>Projet pour le Mali de demain</h2>
-            <p>Partage ton idée ou ton projet pour le développement ou l'amélioration de ta communauté.</p>
-            
-            <form id="form-projet">
-                <div class="form-group">
-                    <label for="nom-citoyen">Ton Nom / Prénom :</label>
-                    <input type="text" id="nom-citoyen" required placeholder="Ex: Amadou Diarra">
-                </div>
-                
-                <div class="form-group">
-                    <label for="texte-projet">Description de ton projet ou idée :</label>
-                    <textarea id="texte-projet" rows="4" required placeholder="Ex: Créer un club de nettoyage dans mon quartier..."></textarea>
-                </div>
-                
-                <button type="submit" id="btn-envoyer">Soumettre mon idée</button>
-            </form>
-            <div id="message-formulaire"></div>
-        </section>
-
-    </main>
-
-    <footer>
-        <p>&copy; 2026 - Développé pour l'amour de la patrie</p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+    <!-- Nouvelle zone pour afficher les projets sauvegardés -->
+    <div id="liste-projets-container" style="margin-top: 2rem;">
+        <h3>Idées partagées :</h3>
+        <ul id="liste-projets"></ul>
+    </div>
+</section>
