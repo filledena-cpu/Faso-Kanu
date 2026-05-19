@@ -53,11 +53,10 @@ boutonEngager.addEventListener('click', function() {
     affichageCompteur.textContent = nombreEngagements;
     boutonEngager.textContent = "Merci pour ton engagement ! 🇲🇱";
     boutonEngager.disabled = true;
-});
-
-
-// --- 2. GESTION DU QUIZ ET DU SCORE ---
+    // --- 2. GESTION DU QUIZ, DU SCORE ET DES BADGES ---
 let score = 0;
+let questionsRepondues = 0; // Nouvelle variable pour suivre la progression
+
 const affichageScore = document.getElementById('valeur-score');
 const feedbackQuiz = document.getElementById('feedback-quiz');
 
@@ -65,28 +64,54 @@ function actualiserScore() {
     affichageScore.textContent = score;
 }
 
+// Fonction clé : Vérifier si le quiz est fini et attribuer le badge
+function verifierFinDuQuiz() {
+    questionsRepondues++;
+
+    // Si l'utilisateur a répondu aux 2 questions
+    if (questionsRepondues === 2) {
+        // Créer un nouvel élément HTML <div> pour le badge
+        const divBadge = document.createElement('div');
+        divBadge.classList.add('badge-citoyen');
+
+        // Structure conditionnelle (if/else) pour attribuer le badge selon le score
+        if (score === 2) {
+            divBadge.style.backgroundColor = "var(--couleur-vert)";
+            divBadge.style.color = "white";
+            divBadge.innerHTML = "🏆 Statut : Citoyen Patriote 🇲🇱";
+            feedbackQuiz.textContent = "Parfait ! Tu connais parfaitement les symboles de la patrie !";
+        } else {
+            divBadge.style.backgroundColor = "var(--couleur-jaune)";
+            divBadge.style.color = "var(--texte-sombre)";
+            divBadge.innerHTML = "🌱 Statut : Futur Citoyen En Apprentissage";
+            feedbackQuiz.textContent = "Le score n'est pas maximal, mais chaque jour est une opportunité d'apprendre pour le pays !";
+        }
+
+        // Ajouter le badge juste en dessous du feedback textuel
+        feedbackQuiz.appendChild(document.createElement('br'));
+        feedbackQuiz.appendChild(divBadge);
+    }
+}
+
 // Validation Question 1
 function verifierQ1(boutonChoisi, estCorrect) {
-    // Désactiver tous les boutons de la question 1 pour bloquer le choix
     const boutonsQ1 = document.querySelectorAll('.q1');
     boutonsQ1.forEach(btn => btn.disabled = true);
 
     if (estCorrect) {
         score++;
         actualiserScore();
-        boutonChoisi.style.backgroundColor = "#A5D6A7"; // Vert clair pour succès
-        feedbackQuiz.textContent = "Correct ! Le Vert symbolise l'agriculture et les forêts du Mali.";
-        feedbackQuiz.style.color = "var(--couleur-vert)";
+        boutonChoisi.style.backgroundColor = "#A5D6A7";
     } else {
-        boutonChoisi.style.backgroundColor = "#EF9A9A"; // Rouge clair pour erreur
-        feedbackQuiz.textContent = "Faux pour la Q1. La première couleur est le Vert.";
-        feedbackQuiz.style.color = "var(--couleur-rouge)";
+        boutonChoisi.style.backgroundColor = "#EF9A9A";
     }
+    
+    // Lancer la vérification de fin de quiz
+    verifierFinDuQuiz();
 }
 
 // Validation Question 2
 function verifierQ2(boutonChoisi, estCorrect) {
-    // Désactiver tous les boutons de la question 2
     const boutonsQ2 = document.querySelectorAll('.q2');
     boutonsQ2.forEach(btn => btn.disabled = true);
 
@@ -94,14 +119,19 @@ function verifierQ2(boutonChoisi, estCorrect) {
         score++;
         actualiserScore();
         boutonChoisi.style.backgroundColor = "#A5D6A7";
-        feedbackQuiz.textContent = "Excellent ! La devise est bien : Un Peuple, Un But, Une Foi.";
-        feedbackQuiz.style.color = "var(--couleur-vert)";
     } else {
         boutonChoisi.style.backgroundColor = "#EF9A9A";
-        feedbackQuiz.textContent = "Dommage ! La bonne devise est : Un Peuple, Un But, Une Foi.";
-        feedbackQuiz.style.color = "var(--couleur-rouge)";
     }
+    
+    // Lancer la vérification de fin de quiz
+    verifierFinDuQuiz();
 }
+});
+
+
+
+
+
 
 
 // --- 3. GESTION DU FORMULAIRE DE PROJETS ---
