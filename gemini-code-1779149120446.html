@@ -1,6 +1,31 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
+<!-- Section 3 : Formulaire de projets avec Historique -->
+<section class="card">
+    <h2>Projet pour le Mali de demain</h2>
+    <p>Partage ton idée ou ton projet pour le développement ou l'amélioration de ta communauté.</p>
+    
+    <form id="form-projet">
+        <div class="form-group">
+            <label for="nom-citoyen">Ton Nom / Prénom :</label>
+            <input type="text" id="nom-citoyen" required placeholder="Ex: Amadou Diarra">
+        </div>
+        
+        <div class="form-group">
+            <label for="texte-projet">Description de ton projet ou idée :</label>
+            <textarea id="texte-projet" rows="4" required placeholder="Ex: Créer un club de nettoyage dans mon quartier..."></textarea>
+        </div>
+        
+        <button type="submit" id="btn-envoyer">Soumettre mon idée</button>
+    </form>
+    <div id="message-formulaire"></div>
+
+    <!-- Nouvelle zone pour afficher les projets sauvegardés -->
+    <div id="liste-projets-container" style="margin-top: 2rem;">
+        <h3>Idées partagées :</h3>
+        <ul id="liste-projets"></ul>
+    </div>
+</section>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faso Kanu - Le Mali de Demain</title>
