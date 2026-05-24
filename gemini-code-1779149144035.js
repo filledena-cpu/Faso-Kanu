@@ -152,3 +152,31 @@ formulaire.addEventListener('submit', function(evenement) {
     // Réinitialiser (vider) les champs du formulaire
     formulaire.reset();
 });
+// --- 4. FONCTIONS DE RÉINITIALISATION (RESET) ---
+
+// Sélection du bouton de nettoyage des projets
+const btnNettoyerProjets = document.getElementById('btn-nettoyer-projets');
+
+// Écouteur pour vider le stockage local des projets
+btnNettoyerProjets.addEventListener('click', function() {
+    // Confirmer l'action auprès de l'utilisateur
+    if (confirm("Es-tu sûr de vouloir effacer toutes les idées enregistrées sur cet appareil ?")) {
+        // 1. Supprimer la clé spécifique dans le localStorage
+        localStorage.removeItem('listeProjets');
+        
+        // 2. Mettre à jour l'affichage immédiatement
+        afficherLesProjets();
+    }
+});
+
+// Fonction pour réinitialiser le Quiz (à appeler pour recommencer)
+function reinitialiserLeQuiz() {
+    score = 0;
+    questionsRepondues = 0;
+    affichageScore.textContent = score;
+    feedbackQuiz.textContent = "";
+    
+    // Vider le conteneur HTML et regénérer les boutons actifs
+    conteneurQuiz.innerHTML = "";
+    genererQuiz();
+}
