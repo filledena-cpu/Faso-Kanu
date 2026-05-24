@@ -152,3 +152,54 @@ footer {
     from { opacity: 0; transform: scale(0.9); }
     to { opacity: 1; transform: scale(1); }
 }
+/* --- NOUVEAU STYLE : TABLEAU D'AFFICHAGE (CARDS) --- */
+
+/* Conteneur de la liste : on le transforme en grille de cartes */
+#liste-projets {
+    list-style-type: none; /* Enlever les puces */
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Une carte par ligne */
+    gap: 15px; /* Espacement entre les cartes */
+}
+
+/* Style de chaque carte individuelle (li) */
+#liste-projets li {
+    background-color: white;
+    padding: 15px 20px;
+    border-radius: 8px; /* Bords arrondis */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Ombre légère pour l'effet de carte */
+    border-left: 5px solid transparent; /* Bordure latérale invisible par défaut */
+    transition: all 0.3s ease; /* Transition fluide pour le hover et le filtrage */
+    animation: apparitionCard 0.5s ease-out; /* Animation à l'apparition */
+}
+
+/* Effet au survol de la carte (UX) */
+#liste-projets li:hover {
+    transform: translateY(-2px); /* Légère élévation */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* Ombre plus marquée */
+}
+
+/* Couleur de bordure alternative pour un design plus pro */
+#liste-projets li:nth-child(odd) {
+    border-left-color: var(--couleur-vert); /* Bordure verte pour les cartes impaires */
+}
+
+#liste-projets li:nth-child(even) {
+    border-left-color: var(--couleur-jaune); /* Bordure jaune pour les cartes paires */
+}
+
+/* Style des éléments à l'intérieur de la carte */
+#liste-projets li strong {
+    color: var(--texte-sombre);
+    font-size: 1.1rem;
+    display: block; /* Mettre l'auteur sur sa propre ligne */
+    margin-bottom: 5px;
+}
+
+/* Petite animation d'apparition CSS */
+@keyframes apparitionCard {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
