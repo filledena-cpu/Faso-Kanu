@@ -14,13 +14,22 @@ function afficherLesProjets() {
     let projetsEnregistres = JSON.parse(localStorage.getItem('listeProjets')) || [];
     
     // Parcourir le tableau et créer un élément de liste HTML pour chaque projet
-    projetsEnregistres.forEach(function(item) {
-        const li = document.createElement('li');
-        li.style.marginBottom = "10px";
-        li.innerHTML = `<strong>${item.auteur}</strong> : ${item.texte}`;
-        listeProjetsAffichage.appendChild(li);
-    });
-}
+    // --- 3. GESTION DU STOCKAGE ET AFFICHAGE (Extrait) ---
+
+// (Dans la boucle projetsEnregistres.forEach...)
+const li = document.createElement('li');
+
+// Modification de la structure HTML injectée pour un design plus clair
+li.innerHTML = `
+    <div class="card-projet-header">
+        <strong>${item.auteur}</strong>
+    </div>
+    <div class="card-projet-content">
+        ${item.texte}
+    </div>
+`;
+
+listeProjetsAffichage.appendChild(li);
 
 // Étape B : Écouter la soumission du formulaire
 formulaire.addEventListener('submit', function(evenement) {
